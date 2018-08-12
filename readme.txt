@@ -84,4 +84,45 @@ InfluxDB shell 1.4.x
 username: todd
 password:
 >
+# Authenticate Telegraf requests to InfluxDB
+    [...]
 
+    ## Write timeout (for the InfluxDB client), formatted as a string.
+    ## If not provided, will default to 5s. 0s means no timeout (not recommended).
+    timeout = "5s"
+    username = "telegraf" #💥
+    password = "metricsmetricsmetricsmetrics" #💥
+
+    [...]
+# User Types and Privileges
+    Admin users:
+        Database management:    
+            CREATE DATABASE
+            DROP DATABASE
+            DROP SERIES
+            DROP MEASUREMENT
+            CREATE RETENTION POLICY
+            ALTER RETENTION POLICY
+            DROP RETENTION POLICY    
+            CREATE CONTINUOUS QUERY
+            DROP CONTINUOUS QUERY
+
+        User management:    ◦      
+            Admin user management:           
+             CREATE USER, GRANT ALL PRIVILEGES, 
+             REVOKE ALL PRIVILEGES, and SHOW USERS    ◦      
+             Non-admin user management:            
+             CREATE USER, GRANT [READ,WRITE,ALL], 
+             REVOKE [READ,WRITE,ALL], and 
+             SHOW GRANTS    ◦      
+        General user management:            
+            SET PASSWORD and DROP USER
+
+    Non-admin users:
+        READ
+        WRITE
+        ALL (both READ and WRITE access)
+        // per user per database
+    
+    # privilege.txt included
+            

@@ -1,0 +1,59 @@
+> CREATE USER admin WITH PASSWORD '<password>' WITH ALL PRIVILEGES;
+
+> CREATE USER paul WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
+
+> CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
+> CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
+> CREATE USER todd WITH PASSWORD '123' WITH ALL PRIVILEGES
+ERR: user already exists
+> CREATE USER todd WITH PASSWORD '123456'
+ERR: user already exists
+> CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
+>
+
+GRANT ALL PRIVILEGES TO "todd"
+
+REVOKE ALL PRIVILEGES FROM "todd"
+
+> SHOW USERS
+user 	 admin
+todd     false
+paul     true
+hermione false
+dobby    false
+
+> CREATE USER todd WITH PASSWORD 'influxdb41yf3'
+> CREATE USER alice WITH PASSWORD 'wonder\'land'
+> CREATE USER "rachel_smith" WITH PASSWORD 'asdf1234!'
+> CREATE USER "monitoring-robot" WITH PASSWORD 'XXXXX'
+> CREATE USER "$savyadmin" WITH PASSWORD 'm3tr1cL0v3r'
+>
+
+> CREATE USER "todd" WITH PASSWORD '123456'
+> CREATE USER "todd" WITH PASSWORD '123456'
+> CREATE USER "todd" WITH PASSWORD '123'
+ERR: user already exists
+> CREATE USER "todd" WITH PASSWORD '123456'
+> CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+ERR: user already exists
+> CREATE USER "todd" WITH PASSWORD '123456'
+>
+
+GRANT READ ON "NOAA_water_database" TO "todd"
+
+GRANT ALL ON "NOAA_water_database" TO "todd"
+
+REVOKE ALL ON "NOAA_water_database" FROM "todd"
+
+REVOKE WRITE ON "NOAA_water_database" FROM "todd"
+
+> SHOW GRANTS FOR "todd"
+database		            privilege
+NOAA_water_database	        WRITE
+another_database_name	    READ
+yet_another_database_name   ALL PRIVILEGES
+
+> SET PASSWORD FOR "todd" = 'influxdb4ever'
+> **Note:** The password [string](/influxdb/v1.4/query_language/spec/#strings) must be wrapped in single quotes.
+
+> DROP USER "todd"
